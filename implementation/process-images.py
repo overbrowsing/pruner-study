@@ -8,11 +8,11 @@ import random
 methods = ['benchmark', 'picture-3', 'picture-5', 'srcset-3', 'srcset-5', 'pruner']
 image_sizes = {
   'benchmark': [(1920, 1080)],
-  'srcset-3':  [(360, 800), (768, 1024), (1920, 1080)],
-  'srcset-5':  [(360, 800), (412, 915), (768, 1024), (1366, 768), (1920, 1080)],
+  'srcset-3': [(360, 800), (768, 1024), (1920, 1080)],
+  'srcset-5': [(360, 800), (412, 915), (768, 1024), (1366, 768), (1920, 1080)],
   'picture-3': [(360, 800), (768, 1024), (1920, 1080)],
   'picture-5': [(360, 800), (412, 915), (768, 1024), (1366, 768), (1920, 1080)],
-  'pruner':    [(1920, 1080)]
+  'pruner': [(1920, 1080)]
 }
 
 with open('implementation/assets/keywords.json', 'r') as f:
@@ -24,6 +24,9 @@ def generate_random_filename(keywords, num_words=3):
   return '-'.join(random_words).lower()
 
 def resize_and_crop_image(image_path, target_width, target_height, output_path):
+  target_width = int(target_width * 1.5)
+  target_height = int(target_height * 1.5)
+
   with Image.open(image_path) as img:
     img_width, img_height = img.size
     aspect_ratio = img_width / img_height
@@ -194,6 +197,9 @@ img {{
 def process_pruner_image(image_path, pruner_folder_path, columns, rows, image_filename):
   with Image.open(image_path) as img:
     target_width, target_height = 1920, 1080
+    target_width = int(target_width * 1.5)
+    target_height = int(target_height * 1.5)
+
     img_width, img_height = img.size
     aspect_ratio = img_width / img_height
     target_aspect_ratio = target_width / target_height
