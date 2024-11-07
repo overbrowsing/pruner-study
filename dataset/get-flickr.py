@@ -22,7 +22,7 @@ def load_api_key(json_file='dataset/api-key.json'):
     print("Error: There was an issue decoding the JSON file.")
     raise
 
-def search_photos(api_key, institution_id, num_photos=1100):
+def search_photos(api_key, institution_id, num_photos=1500):
   url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
   image_data = []
   page = 1
@@ -59,13 +59,18 @@ def search_photos(api_key, institution_id, num_photos=1100):
 
 def download_and_save_image(image_url, title, save_dir='implementation/target', retries=3):
   ensure_directory_exists(save_dir)
+  image_filename = os.path.join(save_dir, f"{title.replace('/', '_')}.jpg")
+
+  # Check if the image file already exists
+  if os.path.exists(image_filename):
+    print(f"Image '{title}' already exists. Skipping download.")
+    return os.path.getsize(image_filename) / 1024  # Return the file size in KB
 
   for attempt in range(retries):
     try:
       image_data = requests.get(image_url)
       image_data.raise_for_status()
       img = Image.open(BytesIO(image_data.content))
-      image_filename = os.path.join(save_dir, f"{title.replace('/', '_')}.jpg")
       img.save(image_filename)
 
       file_size_kb = os.path.getsize(image_filename) / 1024
