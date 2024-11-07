@@ -262,8 +262,8 @@ def create_folders_and_html(target_folder, num_images, output_folder):
     os.makedirs(output_image_folder, exist_ok=True)
 
     image_name = generate_random_filename(keywords, random.randint(3, 5))
-    columns = 8
-    rows = 6
+    columns = 13
+    rows = 9
 
     for method in methods:
       method_folder_path = os.path.join(output_image_folder, method)
