@@ -1,10 +1,3 @@
-# You will need to create a file named 'api-key.json' to the dataset folder.
-# The file should contain your Flickr API key in the following format:
-#
-# {
-#   "api_key": "YOUR_KEY_HERE"
-# }
-
 import requests
 import os
 import csv
