@@ -1,1 +1,1 @@
-# pruner-study
+# Pruner.js Study
