@@ -45,6 +45,14 @@ For detailed results and analysis, please refer to the published study [here](li
     python get-flickr.py
     ```
 
+    #### Calculate Pruner.js Tile Sizes
+
+    [**calc-pruner.py**](waste/calc-pruner.py): Calculates the optimal tile sizes for Pruner.js based on different viewport sizes.
+    ```bash
+    cd ../waste
+    python calc-pruner.py
+    ```
+
     #### Process Images
 
     [**process-images.py**](implementation/process-images.py): Processes the downloaded images, resizing and cropping them for different methods. This will create folders and HTML files for each method.
@@ -64,7 +72,7 @@ For detailed results and analysis, please refer to the published study [here](li
 
     [**calc-waste.py**](waste/calc-waste.py): Calculates the pixel waste for different viewport sizes. This will print the pixel waste percentages for different models.
     ```bash
-    cd ../pixel\ waste
+    cd ../waste
     python calc-waste.py
     ```
 
