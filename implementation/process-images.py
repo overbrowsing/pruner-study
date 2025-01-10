@@ -24,8 +24,8 @@ def generate_random_filename(keywords, num_words=3):
   return '-'.join(random_words).lower()
 
 def resize_and_crop_image(image_path, target_width, target_height, output_path):
-  target_width = int(target_width * 1.5)
-  target_height = int(target_height * 1.5)
+  target_width = int(target_width * 2)
+  target_height = int(target_height * 2)
 
   with Image.open(image_path) as img:
     img_width, img_height = img.size
@@ -39,7 +39,7 @@ def resize_and_crop_image(image_path, target_width, target_height, output_path):
       new_width = target_width
       new_height = int(new_width / aspect_ratio)
 
-    img_resized = img.resize((new_width, new_height), Image.NONE)
+    img_resized = img.resize((new_width, new_height), Image.LANCZOS)
     left = (img_resized.width - target_width) // 2
     top = (img_resized.height - target_height) // 2
     right = left + target_width
@@ -195,11 +195,11 @@ img {{
     f.write(html_content)
 
 def process_pruner_image(image_path, pruner_folder_path, columns, rows, image_filename):
-  with Image.open(image_path) as img:
-    target_width, target_height = 1920, 1080
-    target_width = int(target_width * 1.5)
-    target_height = int(target_height * 1.5)
+  target_width, target_height = 1920, 1080
+  target_width = int(target_width * 2)
+  target_height = int(target_height * 2)
 
+  with Image.open(image_path) as img:
     img_width, img_height = img.size
     aspect_ratio = img_width / img_height
     target_aspect_ratio = target_width / target_height
@@ -211,7 +211,7 @@ def process_pruner_image(image_path, pruner_folder_path, columns, rows, image_fi
       new_width = target_width
       new_height = int(new_width / aspect_ratio)
 
-    img_resized = img.resize((new_width, new_height), Image.NONE)
+    img_resized = img.resize((new_width, new_height), Image.LANCZOS)
 
     left = (img_resized.width - target_width) // 2
     top = (img_resized.height - target_height) // 2
@@ -262,8 +262,8 @@ def create_folders_and_html(target_folder, num_images, output_folder):
     os.makedirs(output_image_folder, exist_ok=True)
 
     image_name = generate_random_filename(keywords, random.randint(3, 5))
-    columns = 13
-    rows = 9
+    columns = 14
+    rows = 6
 
     for method in methods:
       method_folder_path = os.path.join(output_image_folder, method)
