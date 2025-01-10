@@ -1,3 +1,10 @@
+# You will need to create a file named 'api-key.json' in the same directory
+# as this script. The file should contain your Flickr API key in the following format:
+#
+# {
+#   "api_key": "YOUR_KEY_HERE"
+# }
+
 import requests
 import os
 import csv
@@ -61,10 +68,9 @@ def download_and_save_image(image_url, title, save_dir='implementation/target', 
   ensure_directory_exists(save_dir)
   image_filename = os.path.join(save_dir, f"{title.replace('/', '_')}.jpg")
 
-  # Check if the image file already exists
   if os.path.exists(image_filename):
     print(f"Image '{title}' already exists. Skipping download.")
-    return os.path.getsize(image_filename) / 1024  # Return the file size in KB
+    return os.path.getsize(image_filename) / 1024
 
   for attempt in range(retries):
     try:
