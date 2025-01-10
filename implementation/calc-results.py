@@ -47,12 +47,12 @@ def main():
 
   with open(csv_file, mode='w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Folder ID', 'Pruner Images (KB)', 'Pruner HTML (KB)', 'Pruner JS (KB)', 
-                     'Picture 3 Images (KB)', 'Picture 3 HTML (KB)', 'Picture 3 JS (KB)', 
-                     'Picture 5 Images (KB)', 'Picture 5 HTML (KB)', 'Picture 5 JS (KB)', 
-                     'Srcset 3 Images (KB)', 'Srcset 3 HTML (KB)', 'Srcset 3 JS (KB)', 
-                     'Srcset 5 Images (KB)', 'Srcset 5 HTML (KB)', 'Srcset 5 JS (KB)', 
-                     'Benchmark Images (KB)', 'Benchmark HTML (KB)', 'Benchmark JS (KB)'])
+    writer.writerow(['Folder ID', 'Pruner.js Images (KB)', 'Pruner.js HTML (KB)', 'Pruner.js JS (KB)', 
+                     'Picture-3 Images (KB)', 'Picture-3 HTML (KB)',
+                     'Picture-5 Images (KB)', 'Picture-5 HTML (KB)',
+                     'Srcset-3 Images (KB)', 'Srcset-3 HTML (KB)',
+                     'Srcset-5 Images (KB)', 'Srcset-5 HTML (KB)',
+                     'Benchmark Image (KB)', 'Benchmark HTML (KB)'])
 
     for folder_name in os.listdir(output_folder):
       folder_path = os.path.join(output_folder, folder_name)
@@ -95,23 +95,18 @@ def main():
           bytes_to_kb(folder_sizes['pruner']['pruner_js_size']),
           bytes_to_kb(folder_sizes['picture_element_3']['size']),
           bytes_to_kb(folder_sizes['picture_element_3']['html_size']),
-          bytes_to_kb(folder_sizes['picture_element_3']['pruner_js_size']),
           bytes_to_kb(folder_sizes['picture_element_5']['size']),
           bytes_to_kb(folder_sizes['picture_element_5']['html_size']),
-          bytes_to_kb(folder_sizes['picture_element_5']['pruner_js_size']),
           bytes_to_kb(folder_sizes['srcset_3']['size']),
           bytes_to_kb(folder_sizes['srcset_3']['html_size']),
-          bytes_to_kb(folder_sizes['srcset_3']['pruner_js_size']),
           bytes_to_kb(folder_sizes['srcset_5']['size']),
           bytes_to_kb(folder_sizes['srcset_5']['html_size']),
-          bytes_to_kb(folder_sizes['srcset_5']['pruner_js_size']),
           bytes_to_kb(folder_sizes['benchmark']['size']),
           bytes_to_kb(folder_sizes['benchmark']['html_size']),
-          bytes_to_kb(folder_sizes['benchmark']['pruner_js_size']),
         ])
 
   if folder_count > 0:
-    methods = ['Benchmark', 'Picture 3', 'Picture 5', 'Srcset 3', 'Srcset 5', 'Pruner']
+    methods = ['Benchmark', 'Picture-3', 'Picture-5', 'Srcset-3', 'Srcset-5', 'Pruner.js']
     image_sizes = [
       total_sizes['benchmark']['size'] / folder_count,
       total_sizes['picture_element_3']['size'] / folder_count,
@@ -140,7 +135,7 @@ def main():
     plt.figure(figsize=(10, 6))
     plt.bar(methods, image_sizes, label='Images', color='#C0C0C0')
     plt.bar(methods, html_sizes, bottom=image_sizes, label='HTML', color='black')
-    plt.bar(methods, pruner_js_sizes, bottom=[i + j for i, j in zip(image_sizes, html_sizes)], label='Pruner JS', color='lightgreen')
+    plt.bar(methods, pruner_js_sizes, bottom=[i + j for i, j in zip(image_sizes, html_sizes)], label='Pruner.js', color='lightgreen')
 
     plt.xlabel('Methods')
     plt.ylabel('Average Size (KB)')
