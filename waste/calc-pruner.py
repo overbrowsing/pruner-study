@@ -77,16 +77,7 @@ def main() -> None:
   image_width = 1920
   image_height = 1080
 
-  density_input = input("Enter the image density (1x, 1.5x, 2x): ").strip()
-  if density_input == '1x':
-    density = 1.0
-  elif density_input == '1.5x':
-    density = 1.5
-  elif density_input == '2x':
-    density = 2.0
-  else:
-    print("Invalid density input. Defaulting to 1x.")
-    density = 1.0
+  density = 1.0  # Hardcoded density to 1x
 
   primary_breakpoints = get_priority_viewport_sizes()
   secondary_breakpoints = get_secondary_viewport_sizes()
