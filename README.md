@@ -4,8 +4,6 @@
 
 This repository contains the code used in the study investigating the effectiveness of [Pruner.js](https://github.com/overbrowsing/pruner), a JavaScript library designed to optimise responsive images through viewport-based rendering. The study evaluates Pruner.js’ performance, its ability to reduce server-side footprints, and its approach to addressing what we term pixel waste—image areas extending beyond the visible aperture—compared to HTML5.1 methods picture element and srcset attribute.
 
-For detailed results and analysis, please refer to the published study [here](link-to-published-study).
-
 ## How to Repeat the Study
 
 ### Prerequisites
